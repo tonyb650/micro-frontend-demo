@@ -1,7 +1,32 @@
 import { merge } from "webpack-merge";
-import HtmlWebpackPlugin from "html-webpack-plugin";
+// import HtmlWebpackPlugin from "html-webpack-plugin";
 import ModuleFederationPlugin from "webpack/lib/container/ModuleFederationPlugin.js";
 import commonConfig from "./webpack.common.js";
+
+/*
+** Copilot's code for dynamically adding shared dependencies from package.json **
+
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
+const { dependencies } = require("../package.json");
+
+const sharedDependencies = Object.keys(dependencies).reduce((shared, dep) => {
+  return {
+    ...shared,
+    [dep]: { requiredVersion: dependencies[dep] }
+  };
+}, {});
+
+sharedDependencies.react = {
+  singleton: true,
+  requiredVersion: dependencies.react
+};
+
+sharedDependencies["react-dom"] = {
+  singleton: true,
+  requiredVersion: dependencies["react-dom"]
+};
+*/
 
 const devConfig = {
   mode: "development",
@@ -12,15 +37,13 @@ const devConfig = {
     }
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: "./public/index.html"
-    }),
     new ModuleFederationPlugin({
       name: "container",
       remotes: {
         marketingModule: "marketingMFE@http://localhost:8081/remoteEntry.js"
       },
-      shared: { react: { singleton: true }, 'react-dom': { singleton: true } },
+      // shared: sharedDependencies
+      shared: { react: { singleton: true }, "react-dom": { singleton: true } }
     })
   ]
 };
