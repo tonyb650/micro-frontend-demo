@@ -6,8 +6,8 @@ on:
     branches: # could be either main or master
       - main
       - master
-    paths:
-      - "packages/container/**"
+    # paths:
+    #   - "packages/container/**"
 
 defaults:
   run:
