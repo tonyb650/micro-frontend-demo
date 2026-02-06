@@ -32,7 +32,8 @@ const domain = process.env.PRODUCTION_DOMAIN;
 const prodConfig = {
   mode: "production",
   output: {
-    filename: "[name].[contenthash].js" // template for file naming, primarily for caching issues
+    filename: "[name].[contenthash].js", // template for file naming, primarily for caching issues
+    publicPath: '/container/latest/'
   },
   plugins: [
     new ModuleFederationPlugin({

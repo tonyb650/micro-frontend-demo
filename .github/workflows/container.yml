@@ -6,8 +6,9 @@ on:
     branches: # could be either main or master
       - main
       - master
-    # paths:
-    #   - "packages/container/**"
+    paths:
+      - 'packages/container/**' # This I believe means the action will only run if there are changes to files in this path
+      - .github/**
 
 defaults:
   run:
