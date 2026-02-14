@@ -39,7 +39,7 @@ const prodConfig = {
     new ModuleFederationPlugin({
       name: "container",
       remotes: {
-        marketingModule: `marketingMFE@${domain}/marketing/remoteEntry.js`
+        marketingModule: `marketingMFE@${domain}/marketing/latest/remoteEntry.js`
       },
       shared: { react: { singleton: true }, "react-dom": { singleton: true } }
     })
